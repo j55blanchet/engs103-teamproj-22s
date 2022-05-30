@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Module",
+            "type": "python",
+            "request": "launch",
+            "module": "scripts.generate_port_demand_matrix",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "--asian-ports=source-data/cargo-demand/asian-ports.csv",
+                "--us-ports=source-data/cargo-demand/us-ports.csv",
+                "--trade-partners=source-data/cargo-demand/trade-partners.csv",
+                "--output=generated-data/port-demand-matrix.csv",
+            ]
+        }
+    ]
+}
