@@ -38,10 +38,19 @@ Table Format:
 - Source / destination port pairs  
 - Cargo quantity (weekly)
 
+**Ports (Distance, GPS coordinate)**:
+The distance table is based on the distance calculated in Pub. 151 published by National Geosptial-Intelligence Agency.
+* Source port: Asian ports
+* Sink port: US west coast ports
+* GPS coordinate: Latitude and Longitude based on degree, i.e., W 127-36 = -127.6 deg
+* Distance: Nautial mile (NM)
 
     
 **Ships (Supply)**: List of ships  
-- Ship
+The fleet is based on one of largest container shipping alliance ```Ocean Aliance``` consisting of
+CMA CGM, COSCO, Evergreen. The total number of ships in ```Ocean Alliance``` are counted as 1258 (https://ajot.com/premium/ajot-ocean-carrier-alliances-the-tripartite)
+* Extracted ship fleet calling US west coast ports: 88 (https://www.cma-cgm.com/ebusiness/schedules/port)
+* Total TEU: 890,742 
 
 
 **Ports (Queue Capacity)**: List of ports with assoc. info
