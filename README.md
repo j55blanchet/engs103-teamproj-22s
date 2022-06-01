@@ -5,7 +5,7 @@ ENGS 103 (Operations Research) Team Project
 
 `python3 -m venv .env`
 `source .env/bin/activate`
-`pip install dataclass_csv`
+`pip install gurobipy numpy`
 
 ## Data Preparation
 
