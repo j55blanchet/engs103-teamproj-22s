@@ -1,5 +1,6 @@
 
 from dataclasses import dataclass
+from dis import dis
 from typing import List
 import csv
 
@@ -13,6 +14,15 @@ class Port:
 class TradePartner:
     country: str = ''
     trade_volume: float = float('nan')
+
+@dataclass
+class DistanceTableEntry:
+    destinationPort: str = ''
+    destinationLatitude: float = 0.0
+    destinationLongitude: float = 0.0
+    sourcePort: str = ''
+    sourceCountry: str = ''
+    distanceInNauticalMiles: float = 0.0
     
 def main():
     import argparse
@@ -20,7 +30,9 @@ def main():
     parser.add_argument('--asian-ports', type=str, required=True)
     parser.add_argument('--us-ports', type=str, required=True)
     parser.add_argument('--trade-partners', type=str, required=True)
+    parser.add_argument('--distance-table', type=str, required=True)
     parser.add_argument('--output', type=str, required=True)
+
 
     args = parser.parse_args()
 
@@ -55,6 +67,22 @@ def main():
         ]
 
 
+    distance_table: List[DistanceTableEntry] = []
+    with open(args.distance_table) as distance_table_csv:
+        reader = csv.reader(distance_table_csv)
+        next(reader) # skip header row
+        distance_table = [
+            DistanceTableEntry(
+                destinationPort=row[0],
+                destinationLatitude=row[1],
+                destinationLongitude=row[2],
+                sourcePort=row[3],
+                sourceCountry=row[4],
+                distanceInNauticalMiles=row[5]
+            )
+            for row in reader
+        ]
+
     with open(args.output, 'w') as output_csv:
         writer = csv.writer(output_csv)
         writer.writerow([''] + [port.port_name for port in us_ports])
@@ -64,6 +92,7 @@ def main():
                 us_port_demand = trade_partner.trade_volume / us_port_total_capacity_sq
                 writer.writerow([port.port_name, trade_partner.country, asian_port_demand, us_port_demand])
 
+    
 
 if __name__ == "__main__":
     main()
