@@ -9,6 +9,7 @@ import math
 import numpy as np
 from typing import *
 import gurobipy
+from gurobipy import Model, GRB
 
 
 def optimize_transpacific_cargo_routing(
@@ -21,7 +22,7 @@ def optimize_transpacific_cargo_routing(
     [4607.0, 5740.0, 7062.0,    0.0, 1148.0],
     [5529.0, 6280.0, 7669.0, 1148.0,    0.0]
   ]),
-  container_demand_matrix: np.ndarray = np.ndarray([
+  container_demand_matrix: np.ndarray = np.array([
     # Format: |         | Busan | Hong Kong | Singapore
     #         | Seattle |   105 |        85 |        70
     #         | Los A.  |   140 |       190 |        90
@@ -37,6 +38,46 @@ def optimize_transpacific_cargo_routing(
   vessel_costfactor: List[float] = [  19.5,    22.5,    30.5,    32.0,    31.0,    24.0,    25.0,    23.0,    15.0,    31.0]
 ) -> gurobipy.Model:
     
+    asian_port_count = len(asian_port_names)
+    american_port_count = len(american_port_names)
+    all_port_names = asian_port_names + american_port_names
+    all_port_count = asian_port_count + american_port_count
+
     m = gurobipy.Model('Transpacific Cargo Routing')
+
+    for k in range(len(vessel_names)):
+      m.addVars(
+        [
+          f'arrive-ves{k}-"{vessel_names[k]}"-port{asian_port_count + j}-{american_port_names[j]}'
+          for j in range(american_port_count)
+        ],
+        vtype=GRB.CONTINUOUS,
+        lb=0.0,
+        obj=0.0,
+        name=f'Vessel {k} "{vessel_names[k]}" Port Arrival Times'
+      )
+
+      m.addVars(
+        [
+          f'depart-ves{k}-"{vessel_names[k]}"-port{i}-{all_port_names[i]}'
+          for i in range(all_port_count)
+        ],
+        vtype=GRB.CONTINUOUS,
+        lb=0.0,
+        obj=0.0,
+        name=f'Vessel {k} "{vessel_names[k]}" Port Departure Times'
+      )
+      
+      m.addVars(
+        [
+          f'cargo-ves{k}-"{vessel_names[k]}"-port{j+asian_port_count}-{american_port_names[j]}'
+          for j in range(american_port_count)
+        ],
+        vtype=GRB.CONTINUOUS,
+        lb=0.0,
+        obj=0.0,
+        name=f"Vessel {k} Cargo"
+      )
+
 
     return m
