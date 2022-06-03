@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Module",
+            "name": "Compute Port Demand Matrix",
             "type": "python",
             "request": "launch",
             "module": "scripts.generate_port_demand_matrix",
@@ -16,6 +16,16 @@
                 "--us-ports=source-data/cargo-demand/us-ports.csv",
                 "--trade-partners=source-data/cargo-demand/trade-partners.csv",
                 "--output=generated-data/port-demand-matrix.csv",
+            ]
+        },
+        {
+            "name": "Run Ship Routing Optimization",
+            "type": "python",
+            "request": "launch",
+            "module": "scripts.ship_route_optimization",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}",
+            "args": [
             ]
         }
     ]
