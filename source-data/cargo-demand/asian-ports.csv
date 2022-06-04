@@ -1,28 +1,16 @@
-Country, Port Name, Size (2020 / 2021 yearly traffic in million TEU)
+Country, Port, Size (est. monthly US export TEU)
+South Korea,Busan,94244
+Japan,Hakodate,15439
+Vietnam,Ho Chi Minh,53141
+Singapore,Singapore,95588
+China,Hong Kong,96731
+Japan,Kobe,15415
+Philippines,Manila,25323
+Austrailia,Melbourne,3336
+China,Shanghai,212515
+Malaysia,Kelang,34870
+Thailand,Laem Chabang,29680
+Taiwan,Kaohsiung,37037
 
-NOT IN MINGIS DATA
-China, Port of Shenzhen, 27.7
-Malaysia, Port of Tanjung Palapas, 12
-India, Jawaharlal Nehru Port, 5.05
-Japan, Port of Tokyo, 3.594
-Malaysia, Port Kelang, 12.3
-Thailand, Port of Laem Chabang, 8
-Taiwan, Port of Kaohsiung, 9.62 
 
-# IN BOTH DATASETS
-China, Port of Hong Kong, 19.8
-South Korea, Port of Busan, 23.5
-Singapore, Port of Singapore, 37.2
-China, Port of Shanghai, 43.5
 
-# NOT IN MY DATA
-Ho Chi Minh,Vietnam, 7.85, (2020 data - lloydslist
-Kobe,Japan,2.656, (2020 data - lloyds list)
-Hakodate,Japan, 2.66, (2020 data - lloyds list)
-Manila,Philippines, 5.32, (2020 data - lloyds list)
-Melbourne,Austrailia,2.995, (2020 data - lloyds list)
-
-# Unable to find data for
-Yokohama,Japan
-Nagasaki,Japan
-Newcastle,Austrailia

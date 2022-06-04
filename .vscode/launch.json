@@ -5,27 +5,52 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Compute Port Demand Matrix",
+            "name": "Dataprep: Assign Fleet to Origins",
             "type": "python",
             "request": "launch",
-            "module": "scripts.generate_port_demand_matrix",
+            "module": "scripts.dataprep.assign_fleet_to_origins",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "--fleet-file=source-data/ship-fleet/entire-fleet.csv",
+                "--asian-ports-file=source-data/cargo-demand/asian-ports.csv",
+                "--output=generated-data/vessels.csv",
+            ]
+        },
+        {
+            "name": "Dataprep: Compute Port Demand Matrix",
+            "type": "python",
+            "request": "launch",
+            "module": "scripts.dataprep.generate_port_demand_matrix",
             "justMyCode": true,
             "cwd": "${workspaceFolder}",
             "args": [
                 "--asian-ports=source-data/cargo-demand/asian-ports.csv",
                 "--us-ports=source-data/cargo-demand/us-ports.csv",
-                "--trade-partners=source-data/cargo-demand/trade-partners.csv",
+                "--distance-table=source-data/port-distance/distance-table.csv",
                 "--output=generated-data/port-demand-matrix.csv",
+            ]
+        },
+        {
+            "name": "Test Ship Routing Optimization",
+            "type": "python",
+            "request": "launch",
+            "module": "scripts.optimization.optimization_model",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}",
+            "args": [
             ]
         },
         {
             "name": "Run Ship Routing Optimization",
             "type": "python",
             "request": "launch",
-            "module": "scripts.ship_route_optimization",
+            "module": "scripts.optimization.run_optimization",
             "justMyCode": true,
             "cwd": "${workspaceFolder}",
             "args": [
+                "--port-demand-matrix=generated-data/port-demand-matrix.csv",
+                "--distance-table=source-data/port-distance/distance-table.csv",
             ]
         }
     ]
