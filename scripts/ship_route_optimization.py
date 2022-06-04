@@ -12,229 +12,321 @@ import gurobipy
 from gurobipy import Model, GRB
 
 
-def optimize_transpacific_cargo_routing(
-  asian_port_names: List[str] = ["Busan", "Hong Kong", "Singapore"],
-  american_port_names: List[str] = ["Seattle", "Los Angeles", "San Francisco"],
-  port_distance_matrix: np.ndarray = np.array([
-    # Format: |         | Busan | Hong Kong | Singapore | Seattle | Log Angeles | San Fran
-    #         | Seattle |  4607 |      5740 |      7062 |       0 |        1148 |      556
-    #         | Los A.  |  5529 |      6380 |      7669 |    1148 |           0 |      622
-    #         | San Fran|  4919 |      5918 |      7901 |     556 |          622|        0
-    [4607.0, 5740.0, 7062.0,    0.0, 1148.0, 556.0],
-    [5529.0, 6280.0, 7669.0, 1148.0,    0.0, 622.0],
-    [4919.0, 5918.0, 7901.0,  556.0,  622.0,   0.0]
-  ]),
-  container_demand_matrix: np.ndarray = np.array([
-    # Format: |         | Busan | Hong Kong | Singapore
-    #         | Seattle |   75 |        75 |        50
-    #         | Los A.  |   100 |       180 |        70
-    #         | San Fran|   70  |        20 |        40
-    [105, 85,  70],
-    [140, 190, 90],
-    [70,  20,  40]
-  ]),
-  # Names, used for debugging / printing
-  vessel_names: List[str]        = ["ShipA", "ShipB", "ShipC", "ShipD", "ShipE", "ShipF", "ShipG", "ShipH", "ShipI", "ShipJ"],
-  # Vessel initial ports (index i of asian port)
-  vessel_origins: List[int]      = [     0,       0,       0,       1,       1,       1,       1,       2,       2,       2],
-  vessel_capacities: List[int]   = [    60,      80,     105,     110,     110,      70,      80,      70,      50,     110],
-  vessel_maxspeeds: List[float]  = [    24,      23,      20,      22,      21,      24,      22,      26,      25,      22],
-  vessel_costfactor: List[float] = [  19.5,    22.5,    30.5,    32.0,    31.0,    24.0,    25.0,    23.0,    15.0,    31.0]
-) -> gurobipy.Model:
+
+class TranspacificCargoRoutingProblem():
+
+  def __init__(self,
+    asian_port_names: List[str] = ["Busan", "Hong Kong", "Singapore"],
+    american_port_names: List[str] = ["Seattle", "Los Angeles", "San Francisco"],
+    port_distance_matrix: np.ndarray = np.array([
+      # Format: |         | Busan | Hong Kong | Singapore | Seattle | Log Angeles | San Fran
+      #         | Seattle |  4607 |      5740 |      7062 |       0 |        1148 |      556
+      #         | Los A.  |  5529 |      6380 |      7669 |    1148 |           0 |      622
+      #         | San Fran|  4919 |      5918 |      7901 |     556 |          622|        0
+      [4607.0, 5740.0, 7062.0,    0.0, 1148.0, 556.0],
+      [5529.0, 6280.0, 7669.0, 1148.0,    0.0, 622.0],
+      [4919.0, 5918.0, 7901.0,  556.0,  622.0,   0.0]
+    ]),
+    port_demand_matrix: np.ndarray = np.array([
+      # Format: |         | Busan | Hong Kong | Singapore
+      #         | Seattle |   75 |        75 |         50
+      #         | Los A.  |   100 |       180 |        70
+      #         | San Fran|   70  |        20 |        40
+      [75,  75,  50],
+      [100, 180, 70],
+      [70,  20,  40]
+    ]),
+    # Names, used for debugging / printing
+    vessel_names: List[str]        = ["ShipA", "ShipB", "ShipC", "ShipD", "ShipE", "ShipF", "ShipG", "ShipH", "ShipI", "ShipJ"],
+    # Vessel initial ports (index i of asian port)
+    vessel_origins: List[int]      = [     0,       0,       0,       1,       1,       1,       1,       2,       2,       2],
+    vessel_capacities: List[int]   = [    60,      80,     105,     110,     110,      70,      80,      70,      50,     110],
+    vessel_maxspeeds: List[float]  = [    24,      23,      20,      22,      21,      24,      22,      26,      25,      22],
+    vessel_costfactor: List[float] = [  19.5,    22.5,    30.5,    32.0,    31.0,    24.0,    25.0,    23.0,    15.0,    31.0]
+  ) -> None:
+
+    self.asian_port_names = asian_port_names
+    self.american_port_names = american_port_names
+    self.port_distance_matrix = port_distance_matrix
+    self.port_demand_matrix = port_demand_matrix
+    self.vessel_names = vessel_names
+    self.vessel_origins = vessel_origins
+    self.vessel_capacities = vessel_capacities
+    self.vessel_maxspeeds = vessel_maxspeeds
+    self.vessel_costfactor = vessel_costfactor
+
+    self.m = gurobipy.Model('Transpacific Cargo Routing Problem')
+
+    self.vessel_variables = [
+      self._create_vessel_variables(k)
+      for k in range(self.vessel_count)
+    ]
+
+    self._add_constraint_cargo_demand_must_be_satisfied()
+    self._add_vessel_capacity_constraints()
+    self._add_transpacific_singlecrossing_constraints()
+
+    for k in range(self.vessel_count):
+      self._add_american_port_singlearrival_constraints(k)
+      self._add_american_port_routes_constraint(k)
+      self._add_constraint_vessel_must_cross_pacific_togoto_american_ports(k)
+      self._add_constraint_vessel_must_visit_port_to_unload_cargo(k)
+
+  @property
+  def asian_port_count(self):
+    return len(self.asian_port_names)
+  
+  @property
+  def american_port_count(self):
+    return len(self.american_port_names)
+
+  @property
+  def port_names(self):
+    return self.asian_port_names + self.american_port_names
+
+  @property
+  def port_count(self):
+    return self.asian_port_count + self.american_port_count
+
+  @property
+  def vessel_count(self):
+    return len(self.vessel_names)
+
+  def _create_vessel_variables(self, k: int) -> dict:
+    vessel_k_variables = {}
     
-    asian_port_count = len(asian_port_names)
-    american_port_count = len(american_port_names)
-    port_names = asian_port_names + american_port_names
-    port_count = asian_port_count + american_port_count
+    ckj_cargo_unloading_variables = self.m.addVars(
+      [
+        f'c_{k}-{j+self.asian_port_count}'
+        for j in range(self.american_port_count)
+      ],
+      vtype=GRB.INTEGER,
+      lb=0,
+      obj=0,
+      name=f"Vessel {k} Cargo"
+    )
+    vessel_k_variables["cargo_unloading"] = ckj_cargo_unloading_variables
 
-    m = gurobipy.Model('Transpacific Cargo Routing')
+    xkij_transpacific_crossing_variables = self.m.addVars(
+      [
+        f'x_{k}_{i}_{self.asian_port_count+j}'
+        for i in range(self.asian_port_count)
+        for j in range(self.american_port_count)
+        if self.vessel_origins[k] == i
+      ],
+      vtype=GRB.BINARY,
+      lb=0,
+      ub=1,
+      obj=[
+        self.port_distance_matrix[j, i] * self.vessel_costfactor[k]
+        # f'x-crosstranspacific-ves{k}-port{i}-port{j}'
+        for i in range(self.asian_port_count)
+        for j in range(self.american_port_count)
+        if self.vessel_origins[k] == i
+      ],
+      name=f"Vessel {k} Pacific Crossing"
+    )
+    vessel_k_variables["transpacific_crossing"] = xkij_transpacific_crossing_variables
 
-    vessel_variables = []
-    for k in range(len(vessel_names)):
-      vessel_k_variables = {}
-      vessel_variables.append(vessel_k_variables)
+    ykij_americancoast_transit_variables = self.m.addVars(
+      [
+        f'y_{k}-{j1 + self.asian_port_count}-{j2 + self.asian_port_count}'
+        for j1 in range(self.american_port_count)
+        for j2 in range(self.american_port_count)
+        if j1 != j2
+      ],
+      vtype=GRB.BINARY,
+      lb=0,
+      ub=1,
+      obj=[
+        # f'x-crosstranspacific-ves{k}-port{i}-port{j}'
+        self.port_distance_matrix[j1, self.asian_port_count + j2] * self.vessel_costfactor[k]
+        for j1 in range(self.american_port_count)
+        for j2 in range(self.american_port_count)
+        if j1 != j2
+      ],
+      name=f"Vessel {k} American Port Routes"
+    )
+    vessel_k_variables["american_routes"] = ykij_americancoast_transit_variables
+    return vessel_k_variables
 
-      ckj_cargo_unloading_variables = m.addVars(
-        [
-          f'c_{k}-{j+asian_port_count}'
-          for j in range(american_port_count)
-        ],
-        vtype=GRB.INTEGER,
-        lb=0,
-        obj=0,
-        name=f"Vessel {k} Cargo"
-      )
-      vessel_k_variables["cargo_unloading"] = ckj_cargo_unloading_variables
-
-
-      xkij_transpacific_crossing_variables = m.addVars(
-        [
-          f'x_{k}_{i}_{asian_port_count+j}'
-          for i in range(asian_port_count)
-          for j in range(american_port_count)
-          if vessel_origins[k] == i
-        ],
-        vtype=GRB.BINARY,
-        lb=0,
-        ub=1,
-        obj=[
-          port_distance_matrix[j, i] * vessel_costfactor[k]
-          # f'x-crosstranspacific-ves{k}-port{i}-port{j}'
-          for i in range(asian_port_count)
-          for j in range(american_port_count)
-          if vessel_origins[k] == i
-        ],
-        name=f"Vessel {k} Pacific Crossing"
-      )
-      vessel_k_variables["transpacific_crossing"] = xkij_transpacific_crossing_variables
-
-      ykij_americancoast_transit_variables = m.addVars(
-        [
-          f'y_{k}-{j1 + asian_port_count}-{j2 + asian_port_count}'
-          for j1 in range(american_port_count)
-          for j2 in range(american_port_count)
-          if j1 != j2
-        ],
-        vtype=GRB.BINARY,
-        lb=0,
-        ub=1,
-        obj=[
-          # f'x-crosstranspacific-ves{k}-port{i}-port{j}'
-          port_distance_matrix[j1, asian_port_count + j2] * vessel_costfactor[k]
-          for j1 in range(american_port_count)
-          for j2 in range(american_port_count)
-          if j1 != j2
-        ],
-        name=f"Vessel {k} American Port Routes"
-      )
-      vessel_k_variables["american_routes"] = ykij_americancoast_transit_variables
-      
-
+  def _add_vessel_capacity_constraints(self):
     # Vessel's cargo must not exceed capacity
-    m.addConstrs(
+    self.m.addConstrs(
       (
           sum([
-            vessel_variables[k]["cargo_unloading"][f"c_{k}-{asian_port_count + j}"]
-            for j in range(american_port_count)
-          ]) <= vessel_capacities[k]
-          for k in range(len(vessel_names)
+            self.vessel_variables[k]["cargo_unloading"][f"c_{k}-{self.asian_port_count + j}"]
+            for j in range(self.american_port_count)
+          ]) <= self.vessel_capacities[k]
+          for k in range(len(self.vessel_names)
         )
       ),
       name="Vessel Capacity Constraints"
     )
 
+  def _add_transpacific_singlecrossing_constraints(self):
     # Each vessel must cross the ocean only once - from its origin to 
     # some american west coast destination
-    m.addConstrs(
+    self.m.addConstrs(
       (
         sum(
-          vessel_variables[k]["transpacific_crossing"][f"x_{k}_{vessel_origins[k]}_{asian_port_count + j}"]
-          for j in range(american_port_count)
+          self.vessel_variables[k]["transpacific_crossing"][f"x_{k}_{self.vessel_origins[k]}_{self.asian_port_count + j}"]
+          for j in range(self.american_port_count)
         ) <= 1
-        for k in range(len(vessel_names))
+        for k in range(len(self.vessel_names))
       ),
-      name="Transpacific Crossing Constraints"
+      name="Transpacific Single Crossing Constraints"
     )
 
-    for k in range(len(vessel_names)):
-      # Each vessel can only arrive at each port once
-      m.addConstrs(
-        (
-          sum(
-            # Routes from other american ports
-            [
-              vessel_variables[k]["american_routes"][f"y_{k}-{asian_port_count + j2}-{asian_port_count + j}"]
-              for j2 in range(american_port_count)
-              if j2 != j
-            ]
-            # Transpacific route from vessel origin
-            + [
-              vessel_variables[k]["transpacific_crossing"][f"x_{k}_{vessel_origins[k]}_{asian_port_count + j}"]
-            ]
-          ) <= 1
-          for j in range(american_port_count)
-        ),
-        name=f"Vessel {k} American Port Single Arrival Constraints"
-      )
-
-      # Each vessel can only leave a port once, and only if it has arrived
-      m.addConstrs(
-        (
-          # Departing routes (departure sum <= arrivals == 0 or 1)
-          sum(
-            vessel_variables[k]["american_routes"][f"y_{k}-{asian_port_count + j}-{asian_port_count + j2}"]
-            for j2 in range(american_port_count)
-            if j != j2
-          )
-          <=
-
-          # Incoming routes (sum = 0 or 1)
-          sum(
-            # Routes from other american ports
-            [
-              vessel_variables[k]["american_routes"][f"y_{k}-{asian_port_count + j2}-{asian_port_count + j}"]
-              for j2 in range(american_port_count)
-              if j2 != j
-            ]
-            # Transpacific route from vessel origin
-            + [
-              vessel_variables[k]["transpacific_crossing"][f"x_{k}_{vessel_origins[k]}_{asian_port_count + j}"]
-            ]
-          ) 
-          for j in range(american_port_count)
-        ),
-        name=f"Vessel {k} - Port Departure Requires Arrival "
-      )
-
-      # Vessels cannot do american port crossings unless they crossed the pacific
-      m.addConstr(
+  def _add_american_port_singlearrival_constraints(self, k: int):
+    # Each vessel can only arrive at each port once
+    self.m.addConstrs(
+      (
         sum(
-          vessel_variables[k]["american_routes"][f"y_{k}-{asian_port_count + j1}-{asian_port_count + j2}"]
-          for j1 in range(american_port_count)
-          for j2 in range(american_port_count)
-          if j1 != j2
-        ) <= 
-        american_port_count *
+          # Routes from other american ports
+          [
+            self.vessel_variables[k]["american_routes"][f"y_{k}-{self.asian_port_count + j2}-{self.asian_port_count + j}"]
+            for j2 in range(self.american_port_count)
+            if j2 != j
+          ]
+          # Transpacific route from vessel origin
+          + [
+            self.vessel_variables[k]["transpacific_crossing"][f"x_{k}_{self.vessel_origins[k]}_{self.asian_port_count + j}"]
+          ]
+        ) <= 1
+        for j in range(self.american_port_count)
+      ),
+      name=f"Vessel {k} American Port Single Arrival Constraints"
+    )
+
+  def _add_american_port_routes_constraint(self, k: int):
+    # Each vessel can only leave a port once, and only if it has arrived
+    self.m.addConstrs(
+      (
+        # Departing routes (departure sum <= arrivals == 0 or 1)
         sum(
-          vessel_variables[k]["transpacific_crossing"][f"x_{k}_{vessel_origins[k]}_{asian_port_count + j}"]
-          for j in range(american_port_count)
+          self.vessel_variables[k]["american_routes"][f"y_{k}-{self.asian_port_count + j}-{self.asian_port_count + j2}"]
+          for j2 in range(self.american_port_count)
+          if j != j2
         )
-      )
+        <=
 
-      # A vessel may not unload cargo at a port unless it has arrived there
-      m.addConstrs(
-        (
-          vessel_variables[k]["cargo_unloading"][f"c_{k}-{asian_port_count + j}"]
-          <= 
-          vessel_capacities[k] *
-          # incoming routes
+        # Incoming routes (sum = 0 or 1)
+        sum(
+          # Routes from other american ports
+          [
+            self.vessel_variables[k]["american_routes"][f"y_{k}-{self.asian_port_count + j2}-{self.asian_port_count + j}"]
+            for j2 in range(self.american_port_count)
+            if j2 != j
+          ]
+          # Transpacific route from vessel origin
+          + [
+            self.vessel_variables[k]["transpacific_crossing"][f"x_{k}_{self.vessel_origins[k]}_{self.asian_port_count + j}"]
+          ]
+        ) 
+        for j in range(self.american_port_count)
+      ),
+      name=f"Vessel {k} - Port Departure Requires Arrival "
+    )
+  
+  def _add_constraint_vessel_must_cross_pacific_togoto_american_ports(self, k: int):
+    # Vessels cannot do american port crossings unless they crossed the pacific
+    self.m.addConstr(
+      sum(
+        self.vessel_variables[k]["american_routes"][f"y_{k}-{self.asian_port_count + j1}-{self.asian_port_count + j2}"]
+        for j1 in range(self.american_port_count)
+        for j2 in range(self.american_port_count)
+        if j1 != j2
+      ) <= 
+      self.american_port_count *
+      sum(
+        self.vessel_variables[k]["transpacific_crossing"][f"x_{k}_{self.vessel_origins[k]}_{self.asian_port_count + j}"]
+        for j in range(self.american_port_count)
+      )
+    )
+
+  def _add_constraint_vessel_must_visit_port_to_unload_cargo(self, k: int):
+    # A vessel may not unload cargo at a port unless it has arrived there
+    self.m.addConstrs(
+      (
+        self.vessel_variables[k]["cargo_unloading"][f"c_{k}-{self.asian_port_count + j}"]
+        <= 
+        self.vessel_capacities[k] *
+        # incoming routes
+        sum(
+          [ # Routes from other american ports
+            self.vessel_variables[k]["american_routes"][f"y_{k}-{self.asian_port_count + j2}-{self.asian_port_count + j}"]
+            for j2 in range(self.american_port_count)
+            if j2 != j
+          ] # Transpacific route from vessel origin
+          + [
+            self.vessel_variables[k]["transpacific_crossing"][f"x_{k}_{self.vessel_origins[k]}_{self.asian_port_count + j}"]
+          ]
+        )
+        for j in range(self.american_port_count)
+      ),
+      name=f"Vessel {k} - Port Unloading Requires Arrival"
+    )
+
+  def _add_constraint_cargo_demand_must_be_satisfied(self):
+    # Inter-port cargo demand must be satisfied
+    for i in range(self.asian_port_count):
+      for j in range(self.american_port_count):
+        self.m.addConstr(
+          # All cargo unloaded by ships originating from port i to port j
           sum(
-            [ # Routes from other american ports
-              vessel_variables[k]["american_routes"][f"y_{k}-{asian_port_count + j2}-{asian_port_count + j}"]
-              for j2 in range(american_port_count)
-              if j2 != j
-            ] # Transpacific route from vessel origin
-            + [
-              vessel_variables[k]["transpacific_crossing"][f"x_{k}_{vessel_origins[k]}_{asian_port_count + j}"]
+            [
+              self.vessel_variables[k]["cargo_unloading"][f"c_{k}-{self.asian_port_count + j}"]
+              for k in range(self.vessel_count)
+              if self.vessel_origins[k] == i
             ]
-          )
-          for j in range(american_port_count)
-        ),
-        name=f"Vessel {k} - Port Unloading Requires Arrival"
-      )
+          ) ==
+          # Must be equal to the demand from port i to port j
+          self.port_demand_matrix[j, i]          
+        )
+
+  def optimize(self):
+    self.m.optimize()
+
+  def print_status(self):
+    for k in range(self.vessel_count):
+      self.print_vessel_path(k)
+    pass
+
+  def print_vessel_path(self, k: int):
+    origin_port_index = self.vessel_origins[k]
+    origin_port_name = self.port_names[origin_port_index]
+    print(f'Vessel {k} "{self.vessel_names[k]}" Path:', end='')
+    print(" Origin: " + origin_port_name, end='')
+
+    next_american_port = None
+    for j in range(self.american_port_count):
+      if self.vessel_variables[k]['transpacific_crossing'][f'x_{k}_{origin_port_index}_{self.asian_port_count + j}'].x > 0:
+        first_american_port = j
+        break
+    
+    if next_american_port is None:
+      print(" <Didn't cross the pacific> ", end='')
+    
+    total_cargo_unloaded = 0
+    while next_american_port is not None:
+      curr_port = next_american_port
+      cargo_unloaded = self.vessel_variables[k]['cargo_unloading'][f'c_{k}-{self.asian_port_count + curr_port}'].x
+      total_cargo_unloaded += cargo_unloaded
+      print(f' --> {self.american_port_names[self.curr_port]} (deliver: {cargo_unloaded})', end='')
+      next_american_port = None
+      for j in range(self.american_port_count):
+        if j != curr_port and self.vessel_variables[k]['american_routes'][f'y_{k}-{self.asian_port_count + curr_port}-{self.asian_port_count + j}'].x > 0:
+          next_american_port = j
+          break
+    
+    capacity = self.vessel_capacities[k]
+    print(f'  {total_cargo_unloaded}/{capacity} total cargo')
 
     
-    # TODO: Cargo demand must be met
-
-    m.optimize()
-    
-    return m, vessel_variables
-
-
-
-
-
 if __name__ == "__main__":
-  model, vessel_variables = optimize_transpacific_cargo_routing()
-  print(model, vessel_variables)
+  problem = TranspacificCargoRoutingProblem()
+  problem.optimize()
+  problem.print_status()
+
   print('Done')
