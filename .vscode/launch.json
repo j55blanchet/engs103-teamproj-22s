@@ -50,7 +50,8 @@
             "cwd": "${workspaceFolder}",
             "args": [
                 "--port-demand-matrix=generated-data/port-demand-matrix.csv",
-                "--distance-table=source-data/port-distance/distance-table.csv",
+                "--distance-table-file=source-data/port-distance/distance-table.csv",
+                "--vessels-file=generated-data/vessels.csv",
             ]
         }
     ]

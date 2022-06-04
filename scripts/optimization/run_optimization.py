@@ -1,7 +1,7 @@
 import argparse
 import numpy as np
 
-from ..dataprep.vessel_fleet_loader import load_fleet_file
+from ..dataprep.load_vessels import load_vessels_file
 from ..dataprep.distance_table_loader import load_distance_table
 from .optimization_model import TranspacificCargoRoutingProblem
     
@@ -21,23 +21,25 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--port-demand-matrix', type=str, required=True)
-    parser.add_argument('--distances', type=str, required=True)
-    parser.add_argument('--fleet', type=str, required=True)
+    parser.add_argument('--distance-table-file', type=str, required=True)
+    parser.add_argument('--vessels-file', type=str, required=True)
     args = parser.parse_args()
 
     asian_port_names = "Busan,Hakodate,Ho Chi Minh,Singapore,Hong Kong,Kobe,Manila,Melbourne,Shanghai,Kelang,Laem Chabang,Kaohsiung".split(',')
     american_port_names = "Los Angeles,Long Beach,Oakland,Seattle-Tacoma,Vancouver".split(',')
 
-    distance_table = load_distance_table(args.distances)
+    distance_table = load_distance_table(args.distance_table_file)
     distance_matrix = np.array([
         [
             distance_table[american_port_name][asian_port_name]
             for asian_port_name in asian_port_names
+        ] + 
+        [
+            0 if other_american_port_name == american_port_name else distance_table[american_port_name][other_american_port_name]
+            for other_american_port_name in american_port_names
         ]
         for american_port_name in american_port_names
     ])
-
-    fleet = load_fleet_file(args.fleet)
 
     port_demand_matrix = load_port_demand_matrix(
         filepath=args.port_demand_matrix
@@ -50,13 +52,23 @@ if __name__ == "__main__":
     #     [21871,3691,12149,20896,21824,3610,5585,607,49609,7599,6469,8364]
     # ])
 
+    vessels = load_vessels_file(args.vessels_file)
+
+    origin_port_index_lookup = dict(
+        (port, i) for i, port in enumerate(asian_port_names)
+    )
+
     problem = TranspacificCargoRoutingProblem(
         asian_port_names=asian_port_names,
         american_port_names=american_port_names,
         port_distance_matrix=distance_matrix,
         port_demand_matrix=port_demand_matrix,
 
-        # TODO: 
+        vessel_names=[v.name for v in vessels],
+        vessel_origins=[origin_port_index_lookup[v.origin_port] for v in vessels],
+        vessel_capacities=[v.capacity_teu for v in vessels],
+        vessel_maxspeeds=[v.max_speed_knots for v in vessels],
+        vessel_costfactor=[v.cost_factor for v in vessels],
     )
 
     problem.optimize()
