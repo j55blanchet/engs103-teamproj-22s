@@ -69,9 +69,13 @@ if __name__ == "__main__":
         vessel_capacities=[v.capacity_teu for v in vessels],
         vessel_maxspeeds=[v.max_speed_knots for v in vessels],
         vessel_costfactor=[v.cost_factor for v in vessels],
+
+        enforce_integer_cargo=True
     )
 
+    problem.m.Params.timeLimit = 5.0
     problem.optimize()
+    
     problem.print_status()
 
     print('Done')

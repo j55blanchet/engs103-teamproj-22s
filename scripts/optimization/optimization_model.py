@@ -42,7 +42,8 @@ class TranspacificCargoRoutingProblem():
     vessel_origins: List[int]      = [     0,       0,       0,       1,       1,       1,       1,       2,       2,       2],
     vessel_capacities: List[int]   = [    60,      80,     115,     110,     110,      70,      80,      70,      50,     110],
     vessel_maxspeeds: List[float]  = [    24,      23,      20,      22,      21,      24,      22,      26,      25,      22],
-    vessel_costfactor: List[float] = [  19.5,    22.5,    30.5,    32.0,    31.0,    24.0,    25.0,    23.0,    15.0,    31.0]
+    vessel_costfactor: List[float] = [  19.5,    22.5,    30.5,    32.0,    31.0,    24.0,    25.0,    23.0,    15.0,    31.0],
+    enforce_integer_cargo: bool = True
   ) -> None:
 
     self.asian_port_names = asian_port_names
@@ -54,6 +55,7 @@ class TranspacificCargoRoutingProblem():
     self.vessel_capacities = vessel_capacities
     self.vessel_maxspeeds = vessel_maxspeeds
     self.vessel_costfactor = vessel_costfactor
+    self.enforce_integer_cargo = enforce_integer_cargo
 
     self.m = gurobipy.Model('Transpacific Cargo Routing Problem')
 
@@ -100,7 +102,7 @@ class TranspacificCargoRoutingProblem():
         f'c_{k}-{j+self.asian_port_count}'
         for j in range(self.american_port_count)
       ],
-      vtype=GRB.INTEGER,
+      vtype=GRB.INTEGER if self.enforce_integer_cargo else GRB.CONTINUOUS,
       lb=0,
       ub=self.vessel_capacities[k],
       obj=-1,
@@ -309,9 +311,17 @@ class TranspacificCargoRoutingProblem():
     if next_american_port is None:
       print(" <Didn't cross the pacific> ", end='')
     
-    total_cargo_unloaded = 0
+    total_cargo_unloaded = np.sum(
+      self.vessel_variables[k]['cargo_unloading'][f'c_{k}-{self.asian_port_count + j}'].x
+      for j in range(self.american_port_count)
+    )
+
+    self.vessel_variables[k]['cargo_unloading']
+
+    visited_port_indexes = set()
     while next_american_port is not None:
       curr_port = next_american_port
+      visited_port_indexes.add(curr_port)
       cargo_unloaded = self.vessel_variables[k]['cargo_unloading'][f'c_{k}-{self.asian_port_count + curr_port}'].x
       total_cargo_unloaded += cargo_unloaded
       print(f' --> {self.american_port_names[curr_port]} (ul: {cargo_unloaded})', end='')
@@ -320,10 +330,16 @@ class TranspacificCargoRoutingProblem():
         if j != curr_port and self.vessel_variables[k]['american_routes'][f'y_{k}-{self.asian_port_count + curr_port}-{self.asian_port_count + j}'].x > 0:
           next_american_port = j
           break
-    
+      
     capacity = self.vessel_capacities[k]
     print(f'  {total_cargo_unloaded}/{capacity} total cargo')
-
+    for j1 in range(self.american_port_count):
+      for j2 in range(self.american_port_count):
+        if j1 != j2:
+          val = self.vessel_variables[k]['american_routes'][f'y_{k}-{j1 + self.asian_port_count}-{j2 + self.asian_port_count}'].x
+          if val > 0 and j2 not in visited_port_indexes:
+            cargo_dropped_off = self.vessel_variables[k]['cargo_unloading'][f'c_{k}-{j2 + self.asian_port_count}'].x
+            print(f"\t\tUNEXPECTED ROUTE: {self.american_port_names[j1]} ->  {self.american_port_names[j2]} (dropped {cargo_dropped_off} cargo")
     
 if __name__ == "__main__":
   problem = TranspacificCargoRoutingProblem()
