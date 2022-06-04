@@ -1,36 +1,5 @@
-﻿Name,Operator,Type,Geared,Nominal Capacity,Ccial Capacity @14t,Reefer Plugs,Dwt,Built,Flag,Speed
-EVER EAGLE,EVERGREEN MARINE CORPORATION LTD,CC,N,6 332,,703,75 898,2001,UNITED KINGDOM,27
-EVER ELITE,EVERGREEN MARINE CORPORATION LTD,CC,N,6 332,,703,75 898,2002,UNITED KINGDOM,25
-EVER SHINE,EVERGREEN MARINE CORPORATION LTD,CC,N,7 024,,839,78 693,2005,UNITED KINGDOM,25
-EVER STEADY,EVERGREEN MARINE CORPORATION LTD,CC,N,7 024,,839,78 693,2006,SINGAPORE,25
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
+﻿Name,Operator,Type,Geared,NominalCapacity,Ccial Capacity@14t,ReeferPlugs,Dwt,Built,Flag,Speed
+EVEREAGLE,EVERGREENMARINECORPORATIONLTD,CC,N,6332,,703,75898,2001,UNITEDKINGDOM,27
+EVERELITE,EVERGREENMARINECORPORATIONLTD,CC,N,6332,,703,75898,2002,UNITEDKINGDOM,25
+EVERSHINE,EVERGREENMARINECORPORATIONLTD,CC,N,7024,,839,78693,2005,UNITEDKINGDOM,25
+EVERSTEADY,EVERGREENMARINECORPORATIONLTD,CC,N,7024,,839,78693,2006,SINGAPORE,25
