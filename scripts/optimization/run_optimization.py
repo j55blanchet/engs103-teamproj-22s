@@ -23,6 +23,7 @@ if __name__ == "__main__":
     parser.add_argument('--port-demand-matrix', type=str, required=True)
     parser.add_argument('--distance-table-file', type=str, required=True)
     parser.add_argument('--vessels-file', type=str, required=True)
+    parser.add_argument('--output-file', type=str, required=True)
     args = parser.parse_args()
 
     asian_port_names = "Busan,Hakodate,Ho Chi Minh,Singapore,Hong Kong,Kobe,Manila,Melbourne,Shanghai,Kelang,Laem Chabang,Kaohsiung".split(',')
@@ -78,5 +79,15 @@ if __name__ == "__main__":
     
     problem.print_status()
 
-    print('Done')
+    print('Done. Writing routes json')
+
+    import json
+    ship_routes = [
+        problem.get_vessel_results_dict(k)
+        for k in range(len(vessels))
+    ]
+    with open(args.output_file, 'w') as f:
+        json.dump(ship_routes, f, indent=2)
+
+    
 

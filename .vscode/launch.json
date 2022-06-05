@@ -53,6 +53,7 @@
                 "--port-demand-matrix=generated-data/port-demand-matrix.csv",
                 "--distance-table-file=source-data/port-distance/distance-table.csv",
                 "--vessels-file=generated-data/vessels.csv",
+                "--output-file=generated-data/optimized-routes.json",
             ]
         }
     ]

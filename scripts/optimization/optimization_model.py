@@ -366,6 +366,58 @@ class TranspacificCargoRoutingProblem():
         ))
         print(str(int(total_cargo_to_portj)).rjust(len(port_name)), end="  " if j < self.american_port_count - 1 else "\n")
 
+
+
+  
+
+
+  def get_vessel_results_dict(self, k: int):
+    route = self.get_vessel_route(k)
+    route_names = [self.port_names[i] for i in route]
+
+    return {
+      'ship_name': self.vessel_names[k],
+      'start_port': self.port_names[self.vessel_origins[k]],
+      'capacity': self.vessel_capacities[k],
+      'max_speed': self.vessel_maxspeeds[k],
+      'estimated_cost_per_nm': self.vessel_costfactor[k],
+      'route_by_index': self.get_vessel_route(k),
+      'route_by_name': route_names,
+      'route_by_cargo_delivered': [0] + [
+        int(self.vessel_variables[k]["cargo_unloading"][f"c_{k}-{j}"].x)
+        for j in route[1:]
+      ],
+      'travel_segments': [
+        (
+          f"{self.port_names[i1]} -> {self.port_names[i2]}",
+          self.port_distance_matrix[i2-self.asian_port_count, i1]
+        )
+        for i1, i2 in zip(route[:1], route[1:])
+      ]
+    }
+    
+  def get_vessel_route(self, k: int) -> list[int]:
+    origin_port_index = self.vessel_origins[k]
+    next_american_port = None
+    route = [
+      origin_port_index
+    ]
+    for j in range(self.american_port_count):
+      if self.vessel_variables[k]['transpacific_crossing'][f'x_{k}_{origin_port_index}_{self.asian_port_count + j}'].x > 0:
+        next_american_port = j
+        break
+
+    while next_american_port is not None:
+      curr_port = next_american_port
+      route.append(next_american_port + self.asian_port_count)
+      next_american_port = None
+      for j in range(self.american_port_count):
+        if j != curr_port and self.vessel_variables[k]['american_routes'][f'y_{k}-{self.asian_port_count + curr_port}-{self.asian_port_count + j}'].x > 0:
+          next_american_port = j
+          break
+    
+    return route
+
   def print_vessel_path(self, k: int):
     origin_port_index = self.vessel_origins[k]
     origin_port_name = self.port_names[origin_port_index]
@@ -382,6 +434,7 @@ class TranspacificCargoRoutingProblem():
     origin_port_label = f'{origin_port_name}:{remaining_cargo}:r{int(capacity)}'
     print(f'Vessel {k:< 2} {name_w_quote: ^{self.longest_vessel_name+2}}  {origin_port_label: <{self.longest_asian_port_name+13}}', end='')
     
+    route = self.get_vessel_route(k)
 
     next_american_port = None
     for j in range(self.american_port_count):
@@ -389,28 +442,24 @@ class TranspacificCargoRoutingProblem():
         next_american_port = j
         break
     
-    port_entry_pad_amount = self.longest_american_port_name+5
+    # port_entry_pad_amount = self.longest_american_port_name+5
     if next_american_port is None:
       print(f"<nocross>", end='')
 
     self.vessel_variables[k]['cargo_unloading']
 
     visited_port_indexes = set()
-    while next_american_port is not None:
-      curr_port = next_american_port
-      visited_port_indexes.add(curr_port)
-      cargo_unloaded = self.vessel_variables[k]['cargo_unloading'][f'c_{k}-{self.asian_port_count + curr_port}'].x
+    route_i = 1 # skip origin port
+    while route_i < len(route):
+      curr_american_port = route[route_i] - self.asian_port_count
+      route_i += 1
+      visited_port_indexes.add(curr_american_port)
+      cargo_unloaded = self.vessel_variables[k]['cargo_unloading'][f'c_{k}-{self.asian_port_count + curr_american_port}'].x
       remaining_cargo -= int(cargo_unloaded)
-      max_potential_cargo_remaining = self.vessel_variables[k]['cargo_remaining'][f'r_{k}-{self.asian_port_count + curr_port}'].x
+      max_potential_cargo_remaining = self.vessel_variables[k]['cargo_remaining'][f'r_{k}-{self.asian_port_count + curr_american_port}'].x
       total_cargo_unloaded += cargo_unloaded
-      labeltext = f'{self.american_port_names[curr_port]}:u{int(cargo_unloaded)}:h{remaining_cargo}:r{int(max_potential_cargo_remaining)}'
+      labeltext = f'{self.american_port_names[curr_american_port]}:u{int(cargo_unloaded)}:h{remaining_cargo}:r{int(max_potential_cargo_remaining)}'
       print(f' --> {labeltext: ^{self.longest_american_port_name+10}}', end='')
-      next_american_port = None
-      for j in range(self.american_port_count):
-        if j != curr_port and self.vessel_variables[k]['american_routes'][f'y_{k}-{self.asian_port_count + curr_port}-{self.asian_port_count + j}'].x > 0:
-          next_american_port = j
-          break
-      
 
     for j1 in range(self.american_port_count):
       for j2 in range(self.american_port_count):

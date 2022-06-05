@@ -1,0 +1,2123 @@
+[
+  {
+    "ship_name": "APLVANCOUVER",
+    "start_port": "Kaohsiung",
+    "capacity": 9326,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 29773.299779999998,
+    "route_by_index": [
+      11,
+      13
+    ],
+    "route_by_name": [
+      "Kaohsiung",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      8764
+    ],
+    "travel_segments": [
+      [
+        "Kaohsiung -> Long Beach",
+        6117.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "APLSANTIAGO",
+    "start_port": "Kaohsiung",
+    "capacity": 9326,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 29773.299779999998,
+    "route_by_index": [
+      11,
+      12
+    ],
+    "route_by_name": [
+      "Kaohsiung",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      9326
+    ],
+    "travel_segments": [
+      [
+        "Kaohsiung -> Los Angeles",
+        6117.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "NYKVESTA",
+    "start_port": "Kaohsiung",
+    "capacity": 9012,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 29217.51036,
+    "route_by_index": [
+      11,
+      14,
+      13,
+      12
+    ],
+    "route_by_name": [
+      "Kaohsiung",
+      "Oakland",
+      "Long Beach",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      2745,
+      2284,
+      3983
+    ],
+    "travel_segments": [
+      [
+        "Kaohsiung -> Oakland",
+        5807.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "COSCONETHERLANDS",
+    "start_port": "Kaohsiung",
+    "capacity": 13386,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 36959.62158,
+    "route_by_index": [
+      11,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Kaohsiung",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      4078,
+      5855
+    ],
+    "travel_segments": [
+      [
+        "Kaohsiung -> Seattle-Tacoma",
+        5500.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMCHRISTOPHECOLOMB",
+    "start_port": "Laem Chabang",
+    "capacity": 13830,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 37745.514899999995,
+    "route_by_index": [
+      10,
+      15,
+      16,
+      14,
+      13
+    ],
+    "route_by_name": [
+      "Laem Chabang",
+      "Seattle-Tacoma",
+      "Vancouver",
+      "Oakland",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      3150,
+      4528,
+      2183,
+      3969
+    ],
+    "travel_segments": [
+      [
+        "Laem Chabang -> Seattle-Tacoma",
+        7111.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMMARCOPOLO",
+    "start_port": "Laem Chabang",
+    "capacity": 16022,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 41625.42066,
+    "route_by_index": [
+      10,
+      13,
+      12
+    ],
+    "route_by_name": [
+      "Laem Chabang",
+      "Long Beach",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      5020,
+      10828
+    ],
+    "travel_segments": [
+      [
+        "Laem Chabang -> Long Beach",
+        7706.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMMEXICO",
+    "start_port": "Kelang",
+    "capacity": 15072,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 39943.89216,
+    "route_by_index": [
+      9,
+      12,
+      13
+    ],
+    "route_by_name": [
+      "Kelang",
+      "Los Angeles",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      4510,
+      10562
+    ],
+    "travel_segments": [
+      [
+        "Kelang -> Los Angeles",
+        7879.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "APLCOLUMBUS",
+    "start_port": "Kelang",
+    "capacity": 9326,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 29773.299779999998,
+    "route_by_index": [
+      9,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Kelang",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      3700,
+      5319
+    ],
+    "travel_segments": [
+      [
+        "Kelang -> Seattle-Tacoma",
+        7272.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "EVERFINE",
+    "start_port": "Kelang",
+    "capacity": 11888,
+    "max_speed": 23,
+    "estimated_cost_per_nm": 34308.11664,
+    "route_by_index": [
+      9,
+      14,
+      12
+    ],
+    "route_by_name": [
+      "Kelang",
+      "Oakland",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      2564,
+      8213
+    ],
+    "travel_segments": [
+      [
+        "Kelang -> Oakland",
+        7566.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "OOCLTAIPEI",
+    "start_port": "Shanghai",
+    "capacity": 8825,
+    "max_speed": 26,
+    "estimated_cost_per_nm": 28886.51475,
+    "route_by_index": [
+      8,
+      16
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      8624
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Vancouver",
+        5110.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMJ.MADISON",
+    "start_port": "Shanghai",
+    "capacity": 14414,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 38779.212419999996,
+    "route_by_index": [
+      8,
+      14,
+      12
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      14414
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMLOIRE",
+    "start_port": "Shanghai",
+    "capacity": 9365,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 29842.33095,
+    "route_by_index": [
+      8,
+      16
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      9365
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Vancouver",
+        5110.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMSWORDFISH",
+    "start_port": "Shanghai",
+    "capacity": 5095,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 22284.30285,
+    "route_by_index": [
+      8
+    ],
+    "route_by_name": [
+      "Shanghai"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "EVERLIBERAL",
+    "start_port": "Shanghai",
+    "capacity": 8452,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 28226.29356,
+    "route_by_index": [
+      8,
+      15
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Seattle-Tacoma"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      8452
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Seattle-Tacoma",
+        5094.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMT.ROOSEVELT",
+    "start_port": "Shanghai",
+    "capacity": 14414,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 38779.212419999996,
+    "route_by_index": [
+      8,
+      14,
+      12
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      3737,
+      10677
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMT.JEFFERSON",
+    "start_port": "Shanghai",
+    "capacity": 14414,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 38779.212419999996,
+    "route_by_index": [
+      8,
+      14,
+      13
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      14414
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMHERMES",
+    "start_port": "Shanghai",
+    "capacity": 15536,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 40765.18608,
+    "route_by_index": [
+      8,
+      14,
+      12
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      15536
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "COSCOPORTUGAL",
+    "start_port": "Shanghai",
+    "capacity": 13386,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 36959.62158,
+    "route_by_index": [
+      8,
+      14,
+      12
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      13386
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "APLGWANGYANG",
+    "start_port": "Shanghai",
+    "capacity": 10106,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 31153.92318,
+    "route_by_index": [
+      8,
+      14
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      10106
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "OOCLTOKYO",
+    "start_port": "Shanghai",
+    "capacity": 8063,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 27537.75189,
+    "route_by_index": [
+      8
+    ],
+    "route_by_name": [
+      "Shanghai"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "PRESIDENTCLEVELAND",
+    "start_port": "Shanghai",
+    "capacity": 6552,
+    "max_speed": 26,
+    "estimated_cost_per_nm": 24863.23656,
+    "route_by_index": [
+      8
+    ],
+    "route_by_name": [
+      "Shanghai"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMBRAZIL",
+    "start_port": "Shanghai",
+    "capacity": 15072,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 39943.89216,
+    "route_by_index": [
+      8,
+      14,
+      13,
+      12
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Long Beach",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      8804,
+      6268
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "COSCOFRANCE",
+    "start_port": "Shanghai",
+    "capacity": 13386,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 36959.62158,
+    "route_by_index": [
+      8,
+      14,
+      13
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      13386
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMRIGOLETTO",
+    "start_port": "Shanghai",
+    "capacity": 9415,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 29930.832449999998,
+    "route_by_index": [
+      8,
+      15
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Seattle-Tacoma"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      9415
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Seattle-Tacoma",
+        5094.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "PRESIDENTFDROOSEVELT",
+    "start_port": "Shanghai",
+    "capacity": 6589,
+    "max_speed": 26,
+    "estimated_cost_per_nm": 24928.72767,
+    "route_by_index": [
+      8
+    ],
+    "route_by_name": [
+      "Shanghai"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "ONEHONOLULU",
+    "start_port": "Shanghai",
+    "capacity": 9592,
+    "max_speed": 23,
+    "estimated_cost_per_nm": 30244.12776,
+    "route_by_index": [
+      8,
+      14,
+      13
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      9592
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "NYKVEGA",
+    "start_port": "Shanghai",
+    "capacity": 9012,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 29217.51036,
+    "route_by_index": [
+      8,
+      16
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      9012
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Vancouver",
+        5110.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "OOCLSANFRANCISCO",
+    "start_port": "Shanghai",
+    "capacity": 5750,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 23443.6725,
+    "route_by_index": [
+      8
+    ],
+    "route_by_name": [
+      "Shanghai"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "OOCLLONDON",
+    "start_port": "Shanghai",
+    "capacity": 8063,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 27537.75189,
+    "route_by_index": [
+      8
+    ],
+    "route_by_name": [
+      "Shanghai"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMA.LINCOLN",
+    "start_port": "Shanghai",
+    "capacity": 14414,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 38779.212419999996,
+    "route_by_index": [
+      8,
+      14,
+      13
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      14414
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "EVERLOTUS",
+    "start_port": "Melbourne",
+    "capacity": 8452,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 28226.29356,
+    "route_by_index": [
+      7,
+      13,
+      12,
+      14,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Melbourne",
+      "Long Beach",
+      "Los Angeles",
+      "Oakland",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      1075,
+      1295,
+      244,
+      295,
+      425
+    ],
+    "travel_segments": [
+      [
+        "Melbourne -> Long Beach",
+        7032.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "ONEOLYMPUS",
+    "start_port": "Manila",
+    "capacity": 8628,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 28537.81884,
+    "route_by_index": [
+      6,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Manila",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      3020,
+      3909
+    ],
+    "travel_segments": [
+      [
+        "Manila -> Seattle-Tacoma",
+        5630.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "PRESIDENTWILSON",
+    "start_port": "Manila",
+    "capacity": 5780,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 23496.7734,
+    "route_by_index": [
+      6
+    ],
+    "route_by_name": [
+      "Manila"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMNEWJERSEY",
+    "start_port": "Manila",
+    "capacity": 5095,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 22284.30285,
+    "route_by_index": [
+      6,
+      14,
+      13
+    ],
+    "route_by_name": [
+      "Manila",
+      "Oakland",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      1808,
+      3197
+    ],
+    "travel_segments": [
+      [
+        "Manila -> Oakland",
+        6302.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "COSCOITALY",
+    "start_port": "Manila",
+    "capacity": 13386,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 36959.62158,
+    "route_by_index": [
+      6,
+      12,
+      13
+    ],
+    "route_by_name": [
+      "Manila",
+      "Los Angeles",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      9061,
+      4325
+    ],
+    "travel_segments": [
+      [
+        "Manila -> Los Angeles",
+        6530.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMTITAN",
+    "start_port": "Kobe",
+    "capacity": 11388,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 33423.10163999999,
+    "route_by_index": [
+      5,
+      14,
+      13,
+      12
+    ],
+    "route_by_name": [
+      "Kobe",
+      "Oakland",
+      "Long Beach",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      1169,
+      4516,
+      5440
+    ],
+    "travel_segments": [
+      [
+        "Kobe -> Oakland",
+        4822.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "EVERELITE",
+    "start_port": "Kobe",
+    "capacity": 6332,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 24473.82996,
+    "route_by_index": [
+      5,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Kobe",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      1762,
+      2527
+    ],
+    "travel_segments": [
+      [
+        "Kobe -> Seattle-Tacoma",
+        4534.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "NYKOCEANUS",
+    "start_port": "Hong Kong",
+    "capacity": 8628,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 28537.81884,
+    "route_by_index": [
+      4,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Hong Kong",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      3387,
+      5241
+    ],
+    "travel_segments": [
+      [
+        "Hong Kong -> Seattle-Tacoma",
+        5740.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMAMERIGOVESPUCCI",
+    "start_port": "Hong Kong",
+    "capacity": 13830,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 37745.514899999995,
+    "route_by_index": [
+      4,
+      13
+    ],
+    "route_by_name": [
+      "Hong Kong",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      13786
+    ],
+    "travel_segments": [
+      [
+        "Hong Kong -> Long Beach",
+        6380.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CSCLYELLOWSEA",
+    "start_port": "Hong Kong",
+    "capacity": 10036,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 31030.02108,
+    "route_by_index": [
+      4,
+      16
+    ],
+    "route_by_name": [
+      "Hong Kong",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      10036
+    ],
+    "travel_segments": [
+      [
+        "Hong Kong -> Vancouver",
+        5756.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMLAPEROUSE",
+    "start_port": "Hong Kong",
+    "capacity": 13830,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 37745.514899999995,
+    "route_by_index": [
+      4,
+      12
+    ],
+    "route_by_name": [
+      "Hong Kong",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      13757
+    ],
+    "travel_segments": [
+      [
+        "Hong Kong -> Los Angeles",
+        6380.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMPANAMA",
+    "start_port": "Hong Kong",
+    "capacity": 15072,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 39943.89216,
+    "route_by_index": [
+      4,
+      13
+    ],
+    "route_by_name": [
+      "Hong Kong",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      15072
+    ],
+    "travel_segments": [
+      [
+        "Hong Kong -> Long Beach",
+        6380.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "OOCLOAKLAND",
+    "start_port": "Hong Kong",
+    "capacity": 5888,
+    "max_speed": 27,
+    "estimated_cost_per_nm": 23687.93664,
+    "route_by_index": [
+      4
+    ],
+    "route_by_name": [
+      "Hong Kong"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMGEORGIA",
+    "start_port": "Hong Kong",
+    "capacity": 5095,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 22284.30285,
+    "route_by_index": [
+      4
+    ],
+    "route_by_name": [
+      "Hong Kong"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "EVERLOVELY",
+    "start_port": "Hong Kong",
+    "capacity": 8508,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 28325.415240000002,
+    "route_by_index": [
+      4,
+      15
+    ],
+    "route_by_name": [
+      "Hong Kong",
+      "Seattle-Tacoma"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      7252
+    ],
+    "travel_segments": [
+      [
+        "Hong Kong -> Seattle-Tacoma",
+        5740.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "COSCOSPAIN",
+    "start_port": "Hong Kong",
+    "capacity": 13386,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 36959.62158,
+    "route_by_index": [
+      4,
+      14,
+      12
+    ],
+    "route_by_name": [
+      "Hong Kong",
+      "Oakland",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      7193,
+      6193
+    ],
+    "travel_segments": [
+      [
+        "Hong Kong -> Oakland",
+        6047.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMBLUEWHALE",
+    "start_port": "Hong Kong",
+    "capacity": 5095,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 22284.30285,
+    "route_by_index": [
+      4
+    ],
+    "route_by_name": [
+      "Hong Kong"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "EVERFRONT",
+    "start_port": "Singapore",
+    "capacity": 12118,
+    "max_speed": 23,
+    "estimated_cost_per_nm": 34715.22354,
+    "route_by_index": [
+      3
+    ],
+    "route_by_name": [
+      "Singapore"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMANDROMEDA",
+    "start_port": "Singapore",
+    "capacity": 11388,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 33423.10163999999,
+    "route_by_index": [
+      3,
+      14,
+      12
+    ],
+    "route_by_name": [
+      "Singapore",
+      "Oakland",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      7037,
+      4351
+    ],
+    "travel_segments": [
+      [
+        "Singapore -> Oakland",
+        7356.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "APLSENTOSA",
+    "start_port": "Singapore",
+    "capacity": 13892,
+    "max_speed": 23,
+    "estimated_cost_per_nm": 37855.256760000004,
+    "route_by_index": [
+      3,
+      12
+    ],
+    "route_by_name": [
+      "Singapore",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      13892
+    ],
+    "travel_segments": [
+      [
+        "Singapore -> Los Angeles",
+        7669.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "ONEHUMBER",
+    "start_port": "Singapore",
+    "capacity": 8212,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 27801.486360000003,
+    "route_by_index": [
+      3
+    ],
+    "route_by_name": [
+      "Singapore"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMARCTIC",
+    "start_port": "Singapore",
+    "capacity": 14812,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 39483.68436,
+    "route_by_index": [
+      3,
+      13,
+      12
+    ],
+    "route_by_name": [
+      "Singapore",
+      "Long Beach",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      13030,
+      1782
+    ],
+    "travel_segments": [
+      [
+        "Singapore -> Long Beach",
+        7669.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMVIRGINIA",
+    "start_port": "Singapore",
+    "capacity": 5095,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 22284.30285,
+    "route_by_index": [
+      3
+    ],
+    "route_by_name": [
+      "Singapore"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMALEXANDERVONHUMBOLDT",
+    "start_port": "Singapore",
+    "capacity": 16022,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 41625.42066,
+    "route_by_index": [
+      3,
+      13
+    ],
+    "route_by_name": [
+      "Singapore",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      15885
+    ],
+    "travel_segments": [
+      [
+        "Singapore -> Long Beach",
+        7669.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "APLCHONGQING",
+    "start_port": "Singapore",
+    "capacity": 10106,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 31153.92318,
+    "route_by_index": [
+      3,
+      15
+    ],
+    "route_by_name": [
+      "Singapore",
+      "Seattle-Tacoma"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      9730
+    ],
+    "travel_segments": [
+      [
+        "Singapore -> Seattle-Tacoma",
+        7062.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMHOPE",
+    "start_port": "Singapore",
+    "capacity": 14806,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 39473.06418,
+    "route_by_index": [
+      3,
+      12
+    ],
+    "route_by_name": [
+      "Singapore",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      14806
+    ],
+    "travel_segments": [
+      [
+        "Singapore -> Los Angeles",
+        7669.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMMAGELLAN",
+    "start_port": "Ho Chi Minh",
+    "capacity": 13830,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 37745.514899999995,
+    "route_by_index": [
+      2,
+      14,
+      12
+    ],
+    "route_by_name": [
+      "Ho Chi Minh",
+      "Oakland",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      13830
+    ],
+    "travel_segments": [
+      [
+        "Ho Chi Minh -> Oakland",
+        6881.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "COSCOENGLAND",
+    "start_port": "Ho Chi Minh",
+    "capacity": 13386,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 36959.62158,
+    "route_by_index": [
+      2,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Ho Chi Minh",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      4882,
+      8504
+    ],
+    "travel_segments": [
+      [
+        "Ho Chi Minh -> Seattle-Tacoma",
+        6590.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "PRESIDENTTRUMAN",
+    "start_port": "Ho Chi Minh",
+    "capacity": 6552,
+    "max_speed": 26,
+    "estimated_cost_per_nm": 24863.23656,
+    "route_by_index": [
+      2
+    ],
+    "route_by_name": [
+      "Ho Chi Minh"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMGEMINI",
+    "start_port": "Ho Chi Minh",
+    "capacity": 11388,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 33423.10163999999,
+    "route_by_index": [
+      2,
+      15,
+      13,
+      12
+    ],
+    "route_by_name": [
+      "Ho Chi Minh",
+      "Seattle-Tacoma",
+      "Long Beach",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      1036,
+      5252,
+      5100
+    ],
+    "travel_segments": [
+      [
+        "Ho Chi Minh -> Seattle-Tacoma",
+        6590.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "BALTICNORTH",
+    "start_port": "Ho Chi Minh",
+    "capacity": 4228,
+    "max_speed": 19,
+    "estimated_cost_per_nm": 20749.686840000002,
+    "route_by_index": [
+      2
+    ],
+    "route_by_name": [
+      "Ho Chi Minh"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "EVEREAGLE",
+    "start_port": "Ho Chi Minh",
+    "capacity": 6332,
+    "max_speed": 27,
+    "estimated_cost_per_nm": 24473.82996,
+    "route_by_index": [
+      2
+    ],
+    "route_by_name": [
+      "Ho Chi Minh"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMCORTEREAL",
+    "start_port": "Hakodate",
+    "capacity": 13830,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 37745.514899999995,
+    "route_by_index": [
+      1,
+      14,
+      12,
+      13
+    ],
+    "route_by_name": [
+      "Hakodate",
+      "Oakland",
+      "Los Angeles",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      1164,
+      5401,
+      4484
+    ],
+    "travel_segments": [
+      [
+        "Hakodate -> Oakland",
+        4249.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMTIGRIS",
+    "start_port": "Hakodate",
+    "capacity": 10622,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 32067.25866,
+    "route_by_index": [
+      1,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Hakodate",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      1804,
+      2584
+    ],
+    "travel_segments": [
+      [
+        "Hakodate -> Seattle-Tacoma",
+        3941.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "PRESIDENTEISENHOWER",
+    "start_port": "Busan",
+    "capacity": 7831,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 27127.10493,
+    "route_by_index": [
+      0,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Busan",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      1347,
+      6484
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Seattle-Tacoma",
+        4607.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMMEDEA",
+    "start_port": "Busan",
+    "capacity": 9415,
+    "max_speed": 23,
+    "estimated_cost_per_nm": 29930.832449999998,
+    "route_by_index": [
+      0,
+      13
+    ],
+    "route_by_name": [
+      "Busan",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      9415
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Long Beach",
+        5229.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "EVERSTEADY",
+    "start_port": "Busan",
+    "capacity": 7024,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 25698.69072,
+    "route_by_index": [
+      0
+    ],
+    "route_by_name": [
+      "Busan"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "EVERLADEN",
+    "start_port": "Busan",
+    "capacity": 8452,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 28226.29356,
+    "route_by_index": [
+      0,
+      14,
+      13,
+      12
+    ],
+    "route_by_name": [
+      "Busan",
+      "Oakland",
+      "Long Beach",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      1319,
+      6346,
+      787
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Oakland",
+        4917.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "NYKORION",
+    "start_port": "Busan",
+    "capacity": 8628,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 28537.81884,
+    "route_by_index": [
+      0,
+      12
+    ],
+    "route_by_name": [
+      "Busan",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      8063
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Los Angeles",
+        5229.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "OOCLUTAH",
+    "start_port": "Busan",
+    "capacity": 8825,
+    "max_speed": 26,
+    "estimated_cost_per_nm": 28886.51475,
+    "route_by_index": [
+      0,
+      16
+    ],
+    "route_by_name": [
+      "Busan",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      8825
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Vancouver",
+        4623.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CSCLSPRING",
+    "start_port": "Busan",
+    "capacity": 10036,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 31030.02108,
+    "route_by_index": [
+      0,
+      12
+    ],
+    "route_by_name": [
+      "Busan",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      10036
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Los Angeles",
+        5229.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "OOCLCHICAGO",
+    "start_port": "Busan",
+    "capacity": 5714,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 23379.951419999998,
+    "route_by_index": [
+      0,
+      14
+    ],
+    "route_by_name": [
+      "Busan",
+      "Oakland"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      5714
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Oakland",
+        4917.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "EVERFOREVER",
+    "start_port": "Busan",
+    "capacity": 12010,
+    "max_speed": 23,
+    "estimated_cost_per_nm": 34524.0603,
+    "route_by_index": [
+      0,
+      13
+    ],
+    "route_by_name": [
+      "Busan",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      12010
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Long Beach",
+        5229.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CSCLEASTCHINASEA",
+    "start_port": "Busan",
+    "capacity": 10036,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 31030.02108,
+    "route_by_index": [
+      0,
+      15
+    ],
+    "route_by_name": [
+      "Busan",
+      "Seattle-Tacoma"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      9329
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Seattle-Tacoma",
+        4607.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "COSCOSHIPPINGDENALI",
+    "start_port": "Busan",
+    "capacity": 14566,
+    "max_speed": 23,
+    "estimated_cost_per_nm": 39048.256980000006,
+    "route_by_index": [
+      0,
+      12
+    ],
+    "route_by_name": [
+      "Busan",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      14566
+    ],
+    "travel_segments": [
+      [
+        "Busan -> Los Angeles",
+        5229.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMTENERE",
+    "start_port": "Shanghai",
+    "capacity": 14812,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 39483.68436,
+    "route_by_index": [
+      8,
+      14,
+      12
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Oakland",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      0,
+      14812
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Oakland",
+        5401.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CMACGMJULESVERNE",
+    "start_port": "Ho Chi Minh",
+    "capacity": 16022,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 41625.42066,
+    "route_by_index": [
+      2,
+      14,
+      13
+    ],
+    "route_by_name": [
+      "Ho Chi Minh",
+      "Oakland",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      4073,
+      10463
+    ],
+    "travel_segments": [
+      [
+        "Ho Chi Minh -> Oakland",
+        6881.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "CSCLSUMMER",
+    "start_port": "Shanghai",
+    "capacity": 10036,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 31030.02108,
+    "route_by_index": [
+      8,
+      16,
+      14
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Vancouver",
+      "Oakland"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      7725,
+      2311
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Vancouver",
+        5110.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "OOCLVANCOUVER",
+    "start_port": "Shanghai",
+    "capacity": 5888,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 23687.93664,
+    "route_by_index": [
+      8
+    ],
+    "route_by_name": [
+      "Shanghai"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CSCLSOUTHCHINASEA",
+    "start_port": "Busan",
+    "capacity": 10036,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 31030.02108,
+    "route_by_index": [
+      0
+    ],
+    "route_by_name": [
+      "Busan"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMCHILE",
+    "start_port": "Singapore",
+    "capacity": 15072,
+    "max_speed": 22,
+    "estimated_cost_per_nm": 39943.89216,
+    "route_by_index": [
+      3,
+      15,
+      16
+    ],
+    "route_by_name": [
+      "Singapore",
+      "Seattle-Tacoma",
+      "Vancouver"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      445,
+      14627
+    ],
+    "travel_segments": [
+      [
+        "Singapore -> Seattle-Tacoma",
+        7062.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "EVERSHINE",
+    "start_port": "Singapore",
+    "capacity": 7024,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 25698.69072,
+    "route_by_index": [
+      3
+    ],
+    "route_by_name": [
+      "Singapore"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CSCLAUTUMN",
+    "start_port": "Hong Kong",
+    "capacity": 10036,
+    "max_speed": 24,
+    "estimated_cost_per_nm": 31030.02108,
+    "route_by_index": [
+      4
+    ],
+    "route_by_name": [
+      "Hong Kong"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "CMACGMSYMI",
+    "start_port": "Hong Kong",
+    "capacity": 14812,
+    "max_speed": 21,
+    "estimated_cost_per_nm": 39483.68436,
+    "route_by_index": [
+      4,
+      12
+    ],
+    "route_by_name": [
+      "Hong Kong",
+      "Los Angeles"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      14812
+    ],
+    "travel_segments": [
+      [
+        "Hong Kong -> Los Angeles",
+        6380.0
+      ]
+    ]
+  },
+  {
+    "ship_name": "SEATTLEC",
+    "start_port": "Shanghai",
+    "capacity": 4253,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 20793.93759,
+    "route_by_index": [
+      8
+    ],
+    "route_by_name": [
+      "Shanghai"
+    ],
+    "route_by_cargo_delivered": [
+      0
+    ],
+    "travel_segments": []
+  },
+  {
+    "ship_name": "OOCLSOUTHAMPTON",
+    "start_port": "Shanghai",
+    "capacity": 8063,
+    "max_speed": 25,
+    "estimated_cost_per_nm": 27537.75189,
+    "route_by_index": [
+      8,
+      15,
+      13
+    ],
+    "route_by_name": [
+      "Shanghai",
+      "Seattle-Tacoma",
+      "Long Beach"
+    ],
+    "route_by_cargo_delivered": [
+      0,
+      6333,
+      1730
+    ],
+    "travel_segments": [
+      [
+        "Shanghai -> Seattle-Tacoma",
+        5094.0
+      ]
+    ]
+  }
+]
