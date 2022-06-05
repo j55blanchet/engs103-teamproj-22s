@@ -48,7 +48,7 @@
             "module": "scripts.optimization.run_optimization",
             "justMyCode": true,
             "cwd": "${workspaceFolder}",
-            "console": "externalTerminal",
+            "console": "integratedTerminal",
             "args": [
                 "--port-demand-matrix=generated-data/port-demand-matrix.csv",
                 "--distance-table-file=source-data/port-distance/distance-table.csv",

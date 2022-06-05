@@ -331,6 +331,7 @@ class TranspacificCargoRoutingProblem():
         )
 
   def optimize(self):
+    self.m.modelSense = GRB.MINIMIZE
     self.m.optimize()
 
   def print_status(self):
