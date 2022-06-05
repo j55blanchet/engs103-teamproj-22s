@@ -73,7 +73,7 @@ if __name__ == "__main__":
         enforce_integer_cargo=True
     )
 
-    problem.m.Params.timeLimit = 5.0
+    problem.m.Params.timeLimit = 20*60.0 # 20 minutes
     problem.optimize()
     
     problem.print_status()
