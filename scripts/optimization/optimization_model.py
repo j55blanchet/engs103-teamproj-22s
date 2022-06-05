@@ -5,11 +5,84 @@
     from asian last-port-of-calls to ports on the American west-coast.
 """
 
+from dataclasses import dataclass
 import math
 import numpy as np
 from typing import *
 import gurobipy
 from gurobipy import Model, GRB
+
+@dataclass
+class OutputVesselRouteRow:
+  ship_name: str
+  capacity_teu: int
+  max_speed: float
+  est_cost_per_nm_at_18knots: float
+  start_port: str
+  port_1: Union[str, None]
+  cargo_1: Union[int, None]
+  dist_1: Union[float, None]
+  port_2: Union[str, None]
+  cargo_2: Union[int, None]
+  dist_2: Union[float, None]
+  port_3: Union[str, None]
+  cargo_3: Union[int, None]
+  dist_3: Union[float, None]
+  port_4: Union[str, None]
+  cargo_4: Union[int, None]
+  dist_4: Union[float, None]
+  port_5: Union[str, None]
+  cargo_5: Union[int, None]
+  dist_5: Union[float, None]
+
+  def csv_row(self) -> list:
+    return [
+      self.ship_name,
+      self.capacity_teu,
+      self.max_speed,
+      self.est_cost_per_nm_at_18knots,
+      self.start_port,
+      self.port_1,
+      self.cargo_1,
+      self.dist_1,
+      self.port_2,
+      self.cargo_2,
+      self.dist_2,
+      self.port_3,
+      self.cargo_3,
+      self.dist_3,
+      self.port_4,
+      self.cargo_4,
+      self.dist_4,
+      self.port_5,
+      self.cargo_5,
+      self.dist_5,
+    ]
+  
+  @staticmethod
+  def csv_header_row() -> list:
+    return [
+      "ship_name",
+      "capacity_teu",
+      "max_speed",
+      "est_cost_per_nm_at_18knots",
+      "start_port",
+      "port_1",
+      "cargo_1",
+      "dist_1",
+      "port_2",
+      "cargo_2",
+      "dist_2",
+      "port_3",
+      "cargo_3",
+      "dist_3",
+      "port_4",
+      "cargo_4",
+      "dist_4",
+      "port_5",
+      "cargo_5",
+      "dist_5",
+    ]
 
 
 
@@ -372,30 +445,46 @@ class TranspacificCargoRoutingProblem():
   
 
 
-  def get_vessel_results_dict(self, k: int):
+  def get_vessel_results(self, k: int):
     route = self.get_vessel_route(k)
     route_names = [self.port_names[i] for i in route]
+    
+    def get_name(i: int): 
+      return route_names[i] if len(route_names) > i else ""
+    def get_cargo(i: int):
+      if len(route) <= i or i == 0:
+        return None
+      port_i = route[i]
+      return int(self.vessel_variables[k]["cargo_unloading"][f"c_{k}-{port_i}"].x)
+    def get_distance(i: int):
+      if len(route) <= i or i == 0:
+        return None
+      port_i1 = route[i - 1]
+      port_i2 = route[i]
+      return self.port_distance_matrix[port_i2 - self.asian_port_count, port_i1]
 
-    return {
-      'ship_name': self.vessel_names[k],
-      'start_port': self.port_names[self.vessel_origins[k]],
-      'capacity': self.vessel_capacities[k],
-      'max_speed': self.vessel_maxspeeds[k],
-      'estimated_cost_per_nm': self.vessel_costfactor[k],
-      'route_by_index': self.get_vessel_route(k),
-      'route_by_name': route_names,
-      'route_by_cargo_delivered': [0] + [
-        int(self.vessel_variables[k]["cargo_unloading"][f"c_{k}-{j}"].x)
-        for j in route[1:]
-      ],
-      'travel_segments': [
-        (
-          f"{self.port_names[i1]} -> {self.port_names[i2]}",
-          self.port_distance_matrix[i2-self.asian_port_count, i1]
-        )
-        for i1, i2 in zip(route[:1], route[1:])
-      ]
-    }
+    return OutputVesselRouteRow(
+      ship_name=self.vessel_names[k],
+      start_port=self.port_names[self.vessel_origins[k]],
+      capacity_teu=self.vessel_capacities[k],
+      max_speed=self.vessel_maxspeeds[k],
+      est_cost_per_nm_at_18knots=self.vessel_costfactor[k],
+      port_1=get_name(1),
+      cargo_1=get_cargo(1),
+      dist_1=get_distance(1),
+      port_2=get_name(2),
+      cargo_2=get_cargo(2),
+      dist_2=get_distance(2),
+      port_3=get_name(3),
+      cargo_3=get_cargo(3),
+      dist_3=get_distance(3),
+      port_4=get_name(4),
+      cargo_4=get_cargo(4),
+      dist_4=get_distance(4),
+      port_5=get_name(5),
+      cargo_5=get_cargo(5),
+      dist_5=get_distance(5),
+    )
     
   def get_vessel_route(self, k: int) -> list[int]:
     origin_port_index = self.vessel_origins[k]

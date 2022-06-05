@@ -3,7 +3,7 @@ import numpy as np
 
 from ..dataprep.load_vessels import load_vessels_file
 from ..dataprep.distance_table_loader import load_distance_table
-from .optimization_model import TranspacificCargoRoutingProblem
+from .optimization_model import OutputVesselRouteRow, TranspacificCargoRoutingProblem
     
 def load_port_demand_matrix(filepath: str):
     import csv
@@ -74,20 +74,21 @@ if __name__ == "__main__":
         enforce_integer_cargo=True
     )
 
-    problem.m.Params.timeLimit = 60 * 60 # 1 hour
+    problem.m.Params.timeLimit = 60 * 25 # 25 minutes
     problem.optimize()
     
     problem.print_status()
 
-    print('Done. Writing routes json')
+    print('Done. Writing routes csv')
 
-    import json
-    ship_routes = [
-        problem.get_vessel_results_dict(k)
-        for k in range(len(vessels))
-    ]
+    import csv
     with open(args.output_file, 'w') as f:
-        json.dump(ship_routes, f, indent=2)
+        writer = csv.writer(f)
+        writer.writerow(OutputVesselRouteRow.csv_header_row())
+        for k in range(len(vessels)):
+            results = problem.get_vessel_results(k)
+            writer.writerow(results.csv_row())
+        
 
     
 
