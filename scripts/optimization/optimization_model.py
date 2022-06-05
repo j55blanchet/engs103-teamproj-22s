@@ -116,7 +116,9 @@ class TranspacificCargoRoutingProblem():
     vessel_capacities: List[int]   = [    60,      80,     115,     110,     110,      70,      80,      70,      50,     110],
     vessel_maxspeeds: List[float]  = [    24,      23,      20,      22,      21,      24,      22,      26,      25,      22],
     vessel_costfactor: List[float] = [  19.5,    22.5,    30.5,    32.0,    31.0,    24.0,    25.0,    23.0,    15.0,    31.0],
-    enforce_integer_cargo: bool = True
+    enforce_integer_cargo: bool = True,
+    add_duplicate_constraints: bool = True,
+    enable_gurobi_logging: bool = True,
   ) -> None:
 
     self.asian_port_names = asian_port_names
@@ -132,7 +134,8 @@ class TranspacificCargoRoutingProblem():
     self.vessel_maxspeeds = vessel_maxspeeds
     self.vessel_costfactor = vessel_costfactor
     self.enforce_integer_cargo = enforce_integer_cargo
-    
+    self.add_duplicate_constraints = add_duplicate_constraints
+    self.enable_gurobi_logging = enable_gurobi_logging
 
     self.m = gurobipy.Model('Transpacific Cargo Routing Problem')
 
@@ -142,15 +145,20 @@ class TranspacificCargoRoutingProblem():
     ]
 
     self._add_constraint_cargo_demand_must_be_satisfied()
-    self._add_vessel_capacity_constraints()
     self._add_transpacific_singlecrossing_constraints()
 
     for k in range(self.vessel_count):
-      self._add_american_port_singlearrival_constraints(k)
-      self._add_american_port_departure_constraint(k)
-      self._add_constraint_vessel_must_cross_pacific_togoto_american_ports(k)
-      self._add_constraint_vessel_must_visit_port_to_unload_cargo(k)
-      self._add_constraint_vessel_must_have_cargo_remaining(k)
+      self._add_constraints_american_port_singlearrival(k)
+      self._add_constraints_american_port_singledeparture_with_arrival(k)
+      self._add_constraints_vessels_must_have_cargo_space_for_each_unload(k)
+
+    # Unnecessary constraints, (given the "cargo_space_for_each_unlock" constraint)
+    # but they seem to help the model converge more quickly!
+    if self.add_duplicate_constraints:
+      self._add_vessel_capacity_constraints()
+      for k in range(self.vessel_count):
+        self._add_constraints_vessels_must_cross_pacific_togoto_american_ports(k)
+        self._add_constraint_vessels_must_visit_port_to_unload_cargo(k)
 
   @property
   def asian_port_count(self):
@@ -272,7 +280,7 @@ class TranspacificCargoRoutingProblem():
       name="transpacific-single-crossing-constraints"
     )
 
-  def _add_american_port_singlearrival_constraints(self, k: int):
+  def _add_constraints_american_port_singlearrival(self, k: int):
     # Each vessel can only arrive at each port once
     self.m.addConstrs(
       (
@@ -293,7 +301,7 @@ class TranspacificCargoRoutingProblem():
       name=f"vessel-{k}-american-port-single-arrival-constraints"
     )
 
-  def _add_american_port_departure_constraint(self, k: int):
+  def _add_constraints_american_port_singledeparture_with_arrival(self, k: int):
     # Each vessel can only leave a port once, and only if it has arrived
     self.m.addConstrs(
       (
@@ -323,7 +331,7 @@ class TranspacificCargoRoutingProblem():
       name=f"vessel-{k}-port-departure-requires-arrival"
     )
   
-  def _add_constraint_vessel_must_cross_pacific_togoto_american_ports(self, k: int):
+  def _add_constraints_vessels_must_cross_pacific_togoto_american_ports(self, k: int):
     # Vessels cannot do american port crossings unless they crossed the pacific
     self.m.addConstr(
       sum(
@@ -340,7 +348,7 @@ class TranspacificCargoRoutingProblem():
       name=f'vessel-{k}-must-cross-pacific-to-go-to-american-ports'
     )
 
-  def _add_constraint_vessel_must_visit_port_to_unload_cargo(self, k: int):
+  def _add_constraint_vessels_must_visit_port_to_unload_cargo(self, k: int):
     # A vessel may not unload cargo at a port unless it has arrived there
     self.m.addConstrs(
       (
@@ -363,7 +371,7 @@ class TranspacificCargoRoutingProblem():
       name=f"vessel-{k}-port-unloading-requires-arrival"
     )
 
-  def _add_constraint_vessel_must_have_cargo_remaining(self, k:int):
+  def _add_constraints_vessels_must_have_cargo_space_for_each_unload(self, k:int):
     # A vessel must have cargo remaining to unload
     self.m.addConstrs(
       (
@@ -403,11 +411,21 @@ class TranspacificCargoRoutingProblem():
           self.port_demand_matrix[j, i]          
         )
 
-  def optimize(self):
+  def optimize(self, timelimit_secs: int = 20):
+    self.m.Params.OutputFlag = 1 if self.enable_gurobi_logging else 0
+    self.m.Params.timeLimit = timelimit_secs
     self.m.modelSense = GRB.MINIMIZE
+    # print(f"Will optimize with timelimit of {timelimit_secs} seconds")
     self.m.optimize()
+    print(f"Optimization complete. Gap: {self.m.MIPGap:.2%}")
+    print(f"Status: {self.m.status}")
+    total_teu = np.sum(self.port_demand_matrix)
+    cost_per_teu = self.m.objVal / total_teu
+    print(f"Cost: ${self.m.objVal/1000000:.2f} mil USD (${int(cost_per_teu)} per TEU)")
+    return self.m.objVal, self.m.MIPGAP, cost_per_teu
 
   def print_status(self):
+    
     for k in range(self.vessel_count):
       self.print_vessel_path(k)
     print()
@@ -486,7 +504,7 @@ class TranspacificCargoRoutingProblem():
       dist_5=get_distance(5),
     )
     
-  def get_vessel_route(self, k: int) -> list[int]:
+  def get_vessel_route(self, k: int) -> List[int]:
     origin_port_index = self.vessel_origins[k]
     next_american_port = None
     route = [

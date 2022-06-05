@@ -59,6 +59,52 @@ if __name__ == "__main__":
         (port, i) for i, port in enumerate(asian_port_names)
     )
 
+    hyperparm_matrix = []
+    hyperparm_matrix.append(["runtime", "integer_cargo", "extra_constraints", "total_cost", "MIPGap", "cost_per_teu"])
+    for time in [1, 5, 10, 20, 40]:
+        for enforce_integer_cargo, add_duplicate_constraints in [
+            (False, False), (False, True), (True, False), (True, True)
+        ]:
+            print()
+            print()
+            print(f"{time=}s {enforce_integer_cargo=}, {add_duplicate_constraints=}")
+            problem = TranspacificCargoRoutingProblem(
+                asian_port_names=asian_port_names,
+                american_port_names=american_port_names,
+                port_distance_matrix=distance_matrix,
+                port_demand_matrix=port_demand_matrix,
+
+                vessel_names=[v.name for v in vessels],
+                vessel_origins=[origin_port_index_lookup[v.origin_port] for v in vessels],
+                vessel_capacities=[v.capacity_teu for v in vessels],
+                vessel_maxspeeds=[v.max_speed_knots for v in vessels],
+                vessel_costfactor=[v.cost_factor for v in vessels],
+
+                enforce_integer_cargo=enforce_integer_cargo,
+                add_duplicate_constraints=add_duplicate_constraints,
+                enable_gurobi_logging=False
+            )
+            total_cost, mip_gap, cost_per_teu = problem.optimize(
+                timelimit_secs= time
+            )
+            hyperparm_matrix.append([
+                f"{float(time):.1f}".rjust(len(hyperparm_matrix[0][0])), 
+                f"{enforce_integer_cargo}".rjust(len(hyperparm_matrix[0][1])), 
+                f"{add_duplicate_constraints}".rjust(len(hyperparm_matrix[0][2])),
+                f"{int(total_cost)}".rjust(len(hyperparm_matrix[0][3])),
+                f"{float(mip_gap):.2%}".rjust(len(hyperparm_matrix[0][4])),
+                f"{int(cost_per_teu)}".rjust(len(hyperparm_matrix[0][5])),
+            ])
+    
+    print()
+    print()
+    for row in hyperparm_matrix:
+        print("\t".join(row))
+
+    print()
+    print("==== DOING FULL RUN NOW ====")
+    print()
+
     problem = TranspacificCargoRoutingProblem(
         asian_port_names=asian_port_names,
         american_port_names=american_port_names,
@@ -73,10 +119,9 @@ if __name__ == "__main__":
 
         enforce_integer_cargo=True
     )
-
-    problem.m.Params.timeLimit = 60 * 25 # 25 minutes
-    problem.optimize()
-    
+    problem.optimize(
+        timelimit_secs= 60 * 60
+    )
     problem.print_status()
 
     print('Done. Writing routes csv')

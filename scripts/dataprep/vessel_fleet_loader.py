@@ -18,10 +18,10 @@ class FleetEntry:
     def cost_factor(self):
         # FROM: https://www.researchgate.net/profile/Jan-Fransoo-2/publication/239853065_Ocean_container_transportan_underestimated_and_critical_link_in_global_supply_chain_performance/links/5459f1a10cf2bccc4912e69b/Ocean-container-transportan-underestimated-and-critical-link-in-global-supply-chain-performance.pdf?origin=publication_detail
         # $52 / nm for a 5000 TEU ship at 18 knots
-        #  + an additional $1.9667 / nm per TEU
+        #  + an additional $1.9667  per TEU per day (432 nm)
         #  Equates to $13266 base + 1.9667 * TEU
         # Let's assume that ships travel at 18 knots and are 90% full
-        return 13266 + 1.9667 * self.nominal_capaity_teu * 0.9
+        return 52 + (1.9667 * self.nominal_capaity_teu * 0.9 / 432)
     
 
 def load_fleet_file(filepath: str):
