@@ -69,6 +69,19 @@
                 "--vessels-file=generated-data/vessels.csv",
                 "--output-file=generated-data/optimized-routes.csv",
             ]
+        },
+        {
+            "name": "Long Beach Simulation",
+            "type": "python",
+            "request": "launch",
+            "module": "scripts.simulation.simulation",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "--ship_data_filepath=generated-data/longbeach_ships.csv",
+                "--terminal_data_filepath=source-data/sim-data/terminalcapacity.csv",
+                "--port_data_filepath=source-data/sim-data/portcapacity.csv"
+            ]
         }
     ]
 }
