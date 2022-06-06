@@ -458,11 +458,6 @@ class TranspacificCargoRoutingProblem():
         ))
         print(str(int(total_cargo_to_portj)).rjust(len(port_name)), end="  " if j < self.american_port_count - 1 else "\n")
 
-
-
-  
-
-
   def get_vessel_results(self, k: int):
     route = self.get_vessel_route(k)
     route_names = [self.port_names[i] for i in route]

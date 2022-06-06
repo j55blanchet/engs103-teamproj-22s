@@ -1,6 +1,6 @@
-Country, Port Name, Size (May 2021 TEU)
-United States, Los Angeles, 535714
-United States, Long Beach, 444736
-United States, Oakland, 99588
-United States, Seattle-Tacoma, 132714
-Canada, Vancouver, 191637
+Country,Port Name,Size (May 2021 TEU),lat,lon
+United States,Los Angeles,535714,33.75,-118.2708333
+United States,Long Beach,444736,33.77,-118.2216667
+United States,Oakland,99588,37.80333333,-122.325
+United States,Seattle-Tacoma,132714,47.05,-122.3666667
+Canada,Vancouver,191637,45.6433,-122.7039

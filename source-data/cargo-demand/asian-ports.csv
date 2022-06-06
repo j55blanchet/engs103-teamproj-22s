@@ -1,16 +1,13 @@
-Country, Port, Size (est. monthly US export TEU)
-South Korea,Busan,94244
-Japan,Hakodate,15439
-Vietnam,Ho Chi Minh,53141
-Singapore,Singapore,95588
-China,Hong Kong,96731
-Japan,Kobe,15415
-Philippines,Manila,25323
-Austrailia,Melbourne,3336
-China,Shanghai,212515
-Malaysia,Kelang,34870
-Thailand,Laem Chabang,29680
-Taiwan,Kaohsiung,37037
-
-
-
+Country, Port, Size (est. monthly US export TEU),lat,lon
+South Korea,Busan,94244,35.1035,129.0424
+Japan,Hakodate,15439,41.7724,140.6968
+Vietnam,Ho Chi Minh,53141,10.7672,106.7066
+Singapore,Singapore,95588,1.264,103.84
+China,Hong Kong,96731,22.333333,114.133333
+Japan,Kobe,15415,34.6775,135.2269
+Philippines,Manila,25323,14.5833,120.9500
+Austrailia,Melbourne,3336,-37.8369,144.9284
+China,Shanghai,212515,30.626539,122.064958
+Malaysia,Kelang,34870,2.9999,101.3928
+Thailand,Laem Chabang,29680,13.1041,100.9158
+Taiwan,Kaohsiung,37037,22.3501,120.1730
