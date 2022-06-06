@@ -1,0 +1,23 @@
+﻿Name,Port,Berth,Yard,Crane_Panamax,Crane_PostPX,Crane_SuperPX,Total_Crane,Rail System,ContainerCap
+Terminal 18,Seattle-Tacoma,4440,196,0,3,7,10,1,190.0169492
+Terminal 25/30,Seattle-Tacoma,2700,70,3,0,3,6,0,115.5508475
+Terminal 46,Seattle-Tacoma,2300,82,0,3,3,6,0,98.43220339
+Husky,Seattle-Tacoma,2700,93,0,4,0,4,1,126.6327694
+East Sitcum,Seattle-Tacoma,1100,54,4,0,0,4,1,51.59112825
+West Sitcum,Seattle-Tacoma,2200,135,1,4,0,5,0,103.1822565
+Washington United,Seattle-Tacoma,2600,123,0,4,2,6,1,121.9426668
+Pierce County,Seattle-Tacoma,2807,140,0,0,7,7,1,131.6511791
+West Basin 1,Los Angeles,2500,132,0,0,10,10,1,87.84199201
+West Basin 2,Los Angeles,2500,186,0,5,0,5,1,87.84199201
+TraPac,Los Angeles,4630,220,0,9,1,10,1,162.6833692
+Yusen,Los Angeles,5800,185,0,6,6,12,1,203.7934215
+Everport,Los Angeles,5800,205,0,6,5,11,1,203.7934215
+Eagle,Los Angeles,4000,292,0,12,4,16,1,140.5471872
+APM Terminals,Los Angeles,7300,484,0,0,19,19,1,256.4986167
+Pier T,Long Beach,5000,385,0,0,14,14,1,167.8554952
+Pier A,Long Beach,3600,200,0,0,10,10,1,120.8559566
+Pier C,Long Beach,1800,70,0,3,0,3,0,60.42797828
+Pier E,Long Beach,2750,154,0,0,8,8,1,92.32052237
+Pier F,Long Beach,2750,88,0,5,2,7,1,92.32052237
+Pier G,Long Beach,6379,246,2,11,2,15,1,214.1500408
+Pier J,Long Beach,5900,256,0,6,9,15,1,198.0694844

@@ -1,0 +1,5 @@
+﻿Port Name,State,Coast,Terminal #,Total Berth Length (ft),Total Yard Capacity (acreage),Crane - Panamax,Crane - Post PX,Crane - Super PX,Total Vessel Calls,Container Vessels,Max Channel Depth (ft),# Rail System,Max Capacity (TEU),Avg Capacity (TEU)
+Seattle,WA,Pacific,3,9400,348,3,6,13,2413,404,51,1,"17,859","6,761"
+Tacoma,WA,Pacific,5,"10,687",545,5,12,9,2314,535,51,4,"10,106","6,568"
+Los Angeles,CA,Pacific,7,32530,1704,0,38,45,3812,1143,81,7,"17,859","6,473"
+Long Beach,CA,Pacific,7,"28,179","1,399",2,25,45,3314,946,81,6,"17,859","6,498"
