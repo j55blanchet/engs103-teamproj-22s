@@ -132,3 +132,5 @@ dmypy.json
 
 # MS Office Temp Files
 ~$*
+
+*.pptx
