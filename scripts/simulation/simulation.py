@@ -300,8 +300,6 @@ class Simulation:
             print(f"\t{key}: {value}")
 
     def print_queue_length_over_time(self):
-
-        
         plt.plot([d[0] for d in self.queue_length_over_time], [d[1] for d in self.queue_length_over_time])
         mean_queue_length = np.mean(self.queue_length_over_time, axis=0)[1]
         plt.plot([self.queue_length_over_time[0][0], self.queue_length_over_time[-1][0]], [mean_queue_length, mean_queue_length], label=f"Mean queue length: {mean_queue_length:.2}")
